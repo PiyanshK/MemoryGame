@@ -37,7 +37,7 @@ class MemoryGameData:
               return prompts
        
        def images(self) -> {str: pygame.surface}:
-              images = {"Pencil": pygame.image.load("assets/pencil.jpg"),
+              images = {"Pencil": pygame.image.load("assets/Pencil.jpg"),
                         "Mountain": pygame.image.load("assets/Mountain.jpg"),
                         "Numbers": pygame.image.load("assets/Numbers.jpg"),
                         "Letters": pygame.image.load("assets/Letters.jpg")}
