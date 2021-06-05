@@ -64,17 +64,13 @@ class Game(MemoryGameData):
                      del self.Images[invimage]
                      self.correct_square = self.squares.index(random_square)
                      self.correct_square += 1
-              
-              prompt = self.prompts[random_image_choice]
-              
-              return prompt
+
+              return self.prompts[random_image_choice]
        
        def drawscreen(self, difficulty: int = 5, sleeptimer: int = 1) -> pygame.display:
               
               prompt = ""
               current_difficulty = 0
-              amount_of_guesses = 1
-              
               while current_difficulty != difficulty:
                      event = pygame.event.poll()
                      if event.type == pygame.QUIT:
@@ -87,8 +83,8 @@ class Game(MemoryGameData):
                      self.drawlines()
                      prompt = self.draw_random_image(sleeptime=sleeptimer)
                      current_difficulty += 1
-              
-              if self.correct_square == None:
+
+              if self.correct_square is None:
                      print("Game Bug Image did not show up.")
                      print("Restarting...")
                      self.screen.fill((0, 0, 0))
@@ -98,7 +94,9 @@ class Game(MemoryGameData):
                      self.drawscreen(difficulty, sleeptimer)
               else:
                      print(prompt)
-                     
+
+                     amount_of_guesses = 1
+
                      while True:
                             event = pygame.event.poll()
                             self.screen.fill((0, 0, 0))
@@ -109,18 +107,17 @@ class Game(MemoryGameData):
                             if event.type == pygame.K_ESCAPE:
                                    pygame.quit()
                                    sys.exit()
-                            
-                            if event.type == pygame.MOUSEBUTTONUP:
-                                   
+
+                            if (event.type == pygame.MOUSEBUTTONUP
+                                and event.button == 1):
                                    correct_rect = self.fullsquares[self.correct_square]
-                                   if event.button == 1:
-                                          if correct_rect.collidepoint(event.pos):
-                                                 print("guess : " + str(amount_of_guesses))
-                                                 print("Correct!")
-                                                 print("You got it right in " + str(amount_of_guesses) + " guess/ess")
-                                                 sys.exit()
-                                          
-                                          else:
-                                                 print("guess : " + str(amount_of_guesses))
-                                                 amount_of_guesses += 1
-                                                 print("That is not the correct square")
+                                   if correct_rect.collidepoint(event.pos):
+                                          print("guess : " + str(amount_of_guesses))
+                                          print("Correct!")
+                                          print("You got it right in " + str(amount_of_guesses) + " guess/ess")
+                                          sys.exit()
+
+                                   else:
+                                          print("guess : " + str(amount_of_guesses))
+                                          amount_of_guesses += 1
+                                          print("That is not the correct square")
