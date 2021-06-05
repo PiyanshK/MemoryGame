@@ -11,10 +11,20 @@ class MemoryGameData:
               fourth_x = second_x * 3
               first_y = hieght / 3
               second_y = first_y * 2
-              squares = [[first_x, 0], [second_x, 0], [third_x, 0], [fourth_x, 0],
-                         [first_x, first_y], [second_x, first_y], [third_x, first_y], [fourth_x, first_y],
-                         [first_x, second_y], [second_x, second_y], [third_x, second_y], [fourth_x, second_y]]
-              return squares
+              return [
+                  [first_x, 0],
+                  [second_x, 0],
+                  [third_x, 0],
+                  [fourth_x, 0],
+                  [first_x, first_y],
+                  [second_x, first_y],
+                  [third_x, first_y],
+                  [fourth_x, first_y],
+                  [first_x, second_y],
+                  [second_x, second_y],
+                  [third_x, second_y],
+                  [fourth_x, second_y],
+              ]
        
        def fullsquares(self, hieght: int, width: int) -> {int: pygame.Rect}:
               numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
@@ -28,13 +38,16 @@ class MemoryGameData:
               return fullsquares
        
        def prompts(self) -> {str: str}:
-              prompts = {
-                     "Pencil": "Click On the square where you saw the yellow Pencil.",
-                     "Mountain": "Click On the square where you saw the Tall White Mountain.",
-                     "Numbers": "Click On the square where you saw the Numbers surronded by the red circles.",
-                     "Letters": "Click On the square where you saw the the letters in the yellow box."
+              return {
+                  "Pencil":
+                  "Click On the square where you saw the yellow Pencil.",
+                  "Mountain":
+                  "Click On the square where you saw the Tall White Mountain.",
+                  "Numbers":
+                  "Click On the square where you saw the Numbers surronded by the red circles.",
+                  "Letters":
+                  "Click On the square where you saw the the letters in the yellow box.",
               }
-              return prompts
        
        def images(self) -> {str: pygame.surface}:
               images = {"Pencil": pygame.image.load("../assets/pencil.jpg"),
